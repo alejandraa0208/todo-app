@@ -1,9 +1,39 @@
-# React + Vite
+# ToDo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Currently, a user can add todo tasks to the proof-of-life starter application. In this phase, we will add hard-wired, default context settings to the application so that the user can view three incomplete todo tasks. In addition, the user will have the option of viewing any additional incomplete tasks by using pagination functionality.
 
-Currently, two official plugins are available:
+![UML](./Screenshot%202023-10-30%20at%202.34.23%20PM.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# todo-app
+## Creator
+
+Alejandra Altamirano
+
+## Features
+
+**Phase 1**: Incorporate configuration settings to the application.
+
+**Phase 2**:
+
+**Phase 3**:
+
+**Phase 4**:
+
+## Getting Started
+
+### Prerequisites
+
+React/Vite and npm
+
+### Installation
+
+1. Clone the repository:
+
+git clone <https://github.com/alejandraa0208/todo-app>
+
+2.npm install
+
+3.npm start
+
+## Resources
+
+Codefellows, Jacob Knaack and chatGPT
