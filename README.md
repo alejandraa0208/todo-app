@@ -12,7 +12,7 @@ Alejandra Altamirano
 
 **Phase 1**: Incorporate configuration settings to the application.
 
-**Phase 2**:
+**Phase 2**: : Incorporate configuration settings to the application.
 
 **Phase 3**:
 
