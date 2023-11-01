@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react';
 import useForm from '../../hooks/form';
+import './Todo.css';
 import { v4 as uuid } from 'uuid';
 
 import { SettingsContext } from '../../Context/SettingsContext';
+import { Pagination } from '@mantine/core';
 
 const Todo = () => {
 
   const settings = useContext(SettingsContext);
 
   const [list, setList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const defaultValues = settings?.defaultValues || {};
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
@@ -16,15 +19,24 @@ const Todo = () => {
   function addItem(item) {
     item.id = uuid();
     item.complete = false;
-    setList(prevList => [...prevList, item].sort((a, b) => a.difficulty - b.difficulty));
+    setList(prevList => [...prevList, item].sort((a, b) => a[settings.sortWord] - b[settings.sortWord]));
   }
 
-  const displayList = list.filter(item => !item.complete).slice(0, settings?.displayItems || list.length);
+  let displayList = list;
+  if (settings.hideCompleted) {
+    displayList = displayList.filter(item => !item.complete);
+}
+
+
+  const totalItems = displayList.length;
+  const itemsPerPage = settings.displayItems || list.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  displayList = displayList.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <>
       <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {displayList.length} items pending</h1>
+        <h1 data-testid="todo-h1">To Do List: {totalItems} items pending</h1>
       </header>
 
       <form onSubmit={handleSubmit}>
@@ -55,6 +67,14 @@ const Todo = () => {
           <hr />
         </div>
       ))}
+
+      <Pagination
+        total={totalPages}
+        page={currentPage}
+        onChange={setCurrentPage}
+        size="lg"
+        color="blue"
+      />
     </>
   );
 };
