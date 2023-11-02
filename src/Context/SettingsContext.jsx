@@ -10,29 +10,22 @@ export const SettingsProvider = (props) => {
   const [sortField, setSortField] = useState('difficulty'); // Default sort field
   
   useEffect(() => {
-    const savedSettings = localStorage.getItem('settings');
-    if (savedSettings) {
-      const { displayItems, hideCompleted, sortField } = JSON.parse(savedSettings);
-      setDisplayItems(displayItems);
-      setHideCompleted(hideCompleted);
-      setSortField(sortField);
+    let settings = localStorage.getItem('settings');
+    if (settings) {
+      setDisplayItems(settings.displayItems);
+      setHideCompleted(settings.hideCompleted);
     }
   }, []);
 
-  const saveSettingsToLocalStorage = () => {
-    const settings = {
-      displayItems,
-      hideCompleted,
-      sortField
-    };
-    localStorage.setItem('settings', JSON.stringify(settings));
-  };
+  useEffect(() => {
+    localStorage.setItem('settings', JSON.stringify({
+      displayItems, hideCompleted }));
+  }, [hideCompleted, displayItems]);
 
   return (
     <SettingsContext.Provider value={{ 
       displayItems, hideCompleted, sortField,
       setDisplayItems, setHideCompleted, setSortField, 
-      saveSettingsToLocalStorage 
     }}>
       {props.children}
     </SettingsContext.Provider>
